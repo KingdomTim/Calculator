@@ -137,6 +137,7 @@ body {
     font-weight: bold;
     font-size: 30px;
     cursor: pointer;
+    
 }
 
 .backspace {
@@ -149,5 +150,14 @@ body {
 .clear {
     background-color: white;
     color: black;
+}
+
+.operation:hover,
+.number:hover,
+.decimal:hover,
+.equal:hover,
+.backspace:hover,
+.clear:hover {
+    background-color: rgb(196, 196, 196) ;
 }
 
