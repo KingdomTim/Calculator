@@ -20,6 +20,7 @@ body {
     gap: 10px;
     padding: 10px;
     padding-top: 20px;
+    border-radius: 4px;
 }
 
 .display {
@@ -30,17 +31,21 @@ body {
     height: 70px;
     justify-content: flex-end;
     gap: 5px;
-    padding: 3px;
+    padding: 8px;
     border-radius: 10px;
-    background-color: rgb(0, 219, 0);
+    background-color: #81fc81;
     font-weight: bold;
-    font-size: 30px;
+    font-size: 35px;
 }
 
 .currentDisplay,
 .previousDisplay {
     display: flex;
     flex-direction: row-reverse;
+}
+
+.previousDisplay {
+    font-size: 20px;
 }
 
 .row1 {
@@ -92,6 +97,7 @@ body {
     font-weight: bold;
     font-size: 30px;
     cursor: pointer;
+    background-color: rgb(124, 124, 241);
 }
 
 .operation {
@@ -103,6 +109,7 @@ body {
     font-weight: bold;
     font-size: 30px;
     cursor: pointer;
+    background-color: orangered;
 }
 
 .decimal,
@@ -115,7 +122,9 @@ body {
     font-weight: bold;
     font-size: 30px;
     cursor: pointer;
+    background-color: rgb(208, 151, 255);
 }
+
 
 .backspace,
 .clear {
@@ -133,4 +142,12 @@ body {
 .backspace {
     font-size: 60px;
     align-items: flex-end;
+    background-color: black;
+    color: white;
 }
+
+.clear {
+    background-color: white;
+    color: black;
+}
+

@@ -29,7 +29,16 @@ function divideNumbers (a,b) {
     return a / b
 }
 
+function roundNumber (number) {
+    return Math.round(number * 1000000) / 1000000
+}
+
 function operate (operation) {
+if (currentNumber === Infinity) {
+    currentNumber = ""
+    previousNumber = ""
+    operator = "" 
+    return;} 
     operator = operation
     previousNumber = currentNumber
     currentDisplay.textContent = previousNumber + " " + operation
@@ -39,29 +48,37 @@ function operate (operation) {
 
 function equals () {
 
-if (currentNumber != "") {
+if (currentNumber != " ") {
     if (operator === "+") {
         previousNumber = Number(previousNumber)
         currentNumber = Number(currentNumber)
-        currentDisplay.textContent = addNumbers(previousNumber,currentNumber)
         previousDisplay.textContent = previousNumber + " + " + currentNumber
         currentNumber = addNumbers(previousNumber,currentNumber)
+        currentNumber = roundNumber(currentNumber)
+        currentDisplay.textContent = currentNumber
+        operator = ""
     } else if (operator === "-") {
-        currentDisplay.textContent = subtractNumbers(previousNumber,currentNumber)
-        previousDisplay.textContent = previousNumber + " - " + currentNumber 
+        previousDisplay.textContent = previousNumber + " - " + currentNumber
         currentNumber = subtractNumbers(previousNumber,currentNumber)
+        currentNumber = roundNumber(currentNumber)
+        currentDisplay.textContent = currentNumber 
+        operator = ""
     } else if (operator === "x") {
-        currentDisplay.textContent = multiplyNumbers(previousNumber,currentNumber)
-        previousDisplay.textContent = previousNumber + " x " + currentNumber 
+        previousDisplay.textContent = previousNumber + " x " + currentNumber
         currentNumber = multiplyNumbers(previousNumber,currentNumber)
+        currentNumber = roundNumber(currentNumber)
+        currentDisplay.textContent = currentNumber 
+        operator = ""
     } else if (operator === "÷") {
-        currentDisplay.textContent = divideNumbers(previousNumber,currentNumber)
-        previousDisplay.textContent = previousNumber + " ÷ " + currentNumber 
+        previousDisplay.textContent = previousNumber + " ÷ " + currentNumber
         currentNumber = divideNumbers(previousNumber,currentNumber)
+        currentNumber = roundNumber(currentNumber)
+        currentDisplay.textContent = currentNumber 
+        operator = ""
         if (currentNumber === Infinity) {
             currentDisplay.textContent = "Error!"
-            currentNumber = ""
-            previousNumber = ""
+            operator = ""
+            return;
         }
     }
 }
@@ -86,10 +103,17 @@ function ac() {
 }
 
 function removeDigit() {
-    let arr = Array.from(String(currentNumber));
-    let remove = arr.pop()
-    currentNumber = arr
+    if (operator === "") { 
+    currentNumber = currentNumber.slice(0, -1)
     currentDisplay.textContent = currentNumber
+        if (currentNumber === "") {
+            currentDisplay.textContent = "0"
+        }
+    }
+    if(currentNumber === "" && operator === "") {
+        previousNumber = previousNumber.slice(0, -1);
+        currentDisplay.textContent = previousNumber
+    }
 }
 
 function addDecimal() {
@@ -107,7 +131,7 @@ numbers.forEach((number) => {
 
 operations.forEach((operation) => {
     operation.addEventListener("click", (e) => {
-        if (currentNumber != "") {
+        if (currentNumber != "" && operator === "") {
         operate(e.target.textContent)
     }})
 })
@@ -126,7 +150,7 @@ decimal.addEventListener("click", (e) => {
     addDecimal(e.target.textContent)
 })
 
-// backspace.addEventListener("click", (e) => {
-//     removeDigit(e.target.textContent)
-// })
+ backspace.addEventListener("click", (e) => {
+     removeDigit(e.target.textContent)
+})
 
