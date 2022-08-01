@@ -1,10 +1,9 @@
-const numbers = document.querySelectorAll('.numbers')
+const numbers = document.querySelectorAll('.number')
 const equal = document.querySelector('.equal')
 const clear = document.querySelector('.clear')
-const operations = document.querySelectorAll('.operations')
+const operations = document.querySelectorAll('.operation')
 const previousDisplay = document.querySelector('.previousDisplay')
 const currentDisplay = document.querySelector('.currentDisplay')
-const miscallaneous = document.querySelectorAll('.miscallaneous')
 const backspace = document.querySelector('.backspace')
 const decimal = document.querySelector('.decimal')
 
@@ -55,10 +54,15 @@ if (currentNumber != "") {
         currentDisplay.textContent = multiplyNumbers(previousNumber,currentNumber)
         previousDisplay.textContent = previousNumber + " x " + currentNumber 
         currentNumber = multiplyNumbers(previousNumber,currentNumber)
-    } else if (operator === "/") {
+    } else if (operator === "÷") {
         currentDisplay.textContent = divideNumbers(previousNumber,currentNumber)
-        previousDisplay.textContent = previousNumber + " / " + currentNumber 
+        previousDisplay.textContent = previousNumber + " ÷ " + currentNumber 
         currentNumber = divideNumbers(previousNumber,currentNumber)
+        if (currentNumber === Infinity) {
+            currentDisplay.textContent = "Error!"
+            currentNumber = ""
+            previousNumber = ""
+        }
     }
 }
 }
@@ -79,7 +83,6 @@ function ac() {
     operator = ""
     currentDisplay.textContent = "0"
     previousDisplay.textContent = previousNumber
-
 }
 
 function removeDigit() {
