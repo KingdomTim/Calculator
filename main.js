@@ -7,7 +7,11 @@ const currentDisplay = document.querySelector('.currentDisplay')
 const backspace = document.querySelector('.backspace')
 const decimal = document.querySelector('.decimal')
 
-window.addEventListener("keydown", handleKeyPress)
+// If a particular number, operation, or character is pressed on the keyboard, the function activates
+
+window.addEventListener("keydown", keyPress)
+
+// Default values of calculator
 
 let currentNumber = ""
 let previousNumber = ""
@@ -29,9 +33,14 @@ function divideNumbers (a,b) {
     return a / b
 }
 
+// Rounds numbers to 6th decimal place
+
 function roundNumber (number) {
     return Math.round(number * 1000000) / 1000000
 }
+
+// Prevents user from using operations if Infinity is present
+// Otherwise, once an operation is chosen, it is displayed on screen, and initial value becomes stored as the previous value
 
 function operate (operation) {
 if (currentNumber === Infinity) {
@@ -45,6 +54,11 @@ if (currentNumber === Infinity) {
     currentNumber = " "
     previousDisplay.textContent = previousNumber
 }
+
+// Evaluates which operation was chosen, and calculates with said operation
+// Number is rounded if decimals are present
+// Operator is reset after calculation
+// Displays error message is user divides by 0 
 
 function equals () {
 
@@ -84,6 +98,8 @@ if (currentNumber != " ") {
 }
 }
 
+// Enters current value into display
+// Prevents 0 from being repeatedly chosen if it is the first digit
 
 function changeDisplay(number) {
     if (currentNumber[0] === "0" && number === "0") {
@@ -94,6 +110,8 @@ function changeDisplay(number) {
     }
 }
 
+// Resets entire calculator as if user refreshed the page
+
 function ac() {
     currentNumber = ""
     previousNumber = ""
@@ -101,6 +119,8 @@ function ac() {
     currentDisplay.textContent = "0"
     previousDisplay.textContent = previousNumber
 }
+
+// Allows user to backspace and delete an individual digit at a time from the current value
 
 function removeDigit() {
     if (currentNumber !== " ") { 
@@ -116,6 +136,8 @@ function removeDigit() {
     }
 }
 
+// Allows user to add a decimal to perform specific calculations
+
 function addDecimal() {
     if (!currentNumber.includes(".")) {
         currentNumber += "."
@@ -123,7 +145,9 @@ function addDecimal() {
     }
 }
 
-function handleKeyPress(e) {
+// Allows user to display numbers, decimals, and operations or fully clear calculator upon pressing respective keys on keyboard
+
+function keyPress(e) {
     e.preventDefault();
     if (e.key >= 0 && e.key <= 9) {
       changeDisplay(e.key);
@@ -153,6 +177,8 @@ function handleKeyPress(e) {
         ac()
     }
 }
+
+// If a certain button is clicked on, its respective function will be activated  
 
 numbers.forEach((number) => {
     number.addEventListener("click", (e) => {
