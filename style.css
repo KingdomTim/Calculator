@@ -3,7 +3,7 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 700px;
+    height: 800px;
     font-family: roboto, arial, sans-serif;
     background-color: lavender;
 }
@@ -172,4 +172,7 @@ img:hover {
 
 .footer {
     font-weight: bold;
+    display: flex;
+    align-items: flex-end;
+    gap: 5px;
 }
