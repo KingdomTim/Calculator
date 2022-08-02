@@ -28,14 +28,14 @@ body {
     flex-direction: column;
     border: 1px solid black;
     width: 400px;
-    height: 70px;
+    height: 100px;
     justify-content: flex-end;
     gap: 5px;
     padding: 8px;
     border-radius: 10px;
     background-color: #81fc81;
     font-weight: bold;
-    font-size: 35px;
+    font-size: 30px;
 }
 
 .currentDisplay,
@@ -158,6 +158,18 @@ body {
 .equal:hover,
 .backspace:hover,
 .clear:hover {
-    background-color: rgb(196, 196, 196) ;
+    background-color: rgb(180, 180, 180) ;
 }
 
+img {
+    width: 20px;
+    margin-top: 10px;
+}
+
+img:hover {
+    width: 23px;
+}
+
+.footer {
+    font-weight: bold;
+}

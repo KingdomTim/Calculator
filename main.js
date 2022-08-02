@@ -7,7 +7,7 @@ const currentDisplay = document.querySelector('.currentDisplay')
 const backspace = document.querySelector('.backspace')
 const decimal = document.querySelector('.decimal')
 
-
+window.addEventListener("keydown", handleKeyPress)
 
 let currentNumber = ""
 let previousNumber = ""
@@ -88,7 +88,7 @@ if (currentNumber != " ") {
 function changeDisplay(number) {
     if (currentNumber[0] === "0" && number === "0") {
         return;
-    } else if(currentNumber.length <=9) {
+    } else if(currentNumber.length <=10 && currentNumber[0] !== 0) {
     currentNumber += number
     currentDisplay.textContent = previousNumber + " " + operator + currentNumber 
     }
@@ -103,23 +103,54 @@ function ac() {
 }
 
 function removeDigit() {
-    if (operator === "") { 
+    if (currentNumber !== " ") { 
     currentNumber = currentNumber.slice(0, -1)
-    currentDisplay.textContent = currentNumber
+    currentDisplay.textContent = previousNumber + " " + operator + " " + currentNumber
         if (currentNumber === "") {
             currentDisplay.textContent = "0"
         }
     }
-    if(currentNumber === "" && operator === "") {
+    if (currentNumber === "" && previousNumber !== "" && operator === "") {
         previousNumber = previousNumber.slice(0, -1);
-        currentDisplay.textContent = previousNumber
+        currentDisplay.textContent = previousNumber + " " + operator + previousNumber;
     }
 }
 
 function addDecimal() {
     if (!currentNumber.includes(".")) {
         currentNumber += "."
-        currentDisplay.textContent = currentNumber
+        currentDisplay.textContent = previousNumber + " " + operator + currentNumber
+    }
+}
+
+function handleKeyPress(e) {
+    e.preventDefault();
+    if (e.key >= 0 && e.key <= 9) {
+      changeDisplay(e.key);
+    }
+    if (
+      e.key === "Enter" ||
+      (e.key === "=" && currentNumber != "" && previousNumber != "")
+    ) {
+      equals();
+    }
+    if (e.key === "+" || e.key === "-") {
+      operate(e.key);
+    }
+    if (e.key === "x" || e.key === "*") {
+      operate("x");
+    }
+    if (e.key === "/") {
+        operate("÷")
+    }
+    if (e.key === ".") {
+      addDecimal();
+    }
+    if (e.key === "Backspace") {
+      removeDigit();
+    }
+    if (e.key === "c") {
+        ac()
     }
 }
 
